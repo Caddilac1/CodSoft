@@ -5,7 +5,7 @@
 <div class="container" style="margin-top: 50px;">
     <h2 class="text-center">Edit Todo</h2>
     <br>
-    <form action="{% url 'edit_todo' ed.id %}" method="post">
+    <form action="{% url 'edit_todo' ed.id %}" method="POST">
         {% csrf_token %}
         
         <!-- Title field -->
