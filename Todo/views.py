@@ -110,13 +110,6 @@ def logoutpage(request):
     messages.success(request , 'You have been successfully logged out')
     return redirect('home')
 
-@login_required
-def updatestatus(request,pk):
-    stat = Todo.objects.filter(user = request.user).get(id = pk)
-    stat.completed = not stat.completed
-    stat.save()
-    messages.success(request, 'Todo status updated successfully')
-    return redirect('view_todo')
 
 @login_required
 def view_todo_details(request,pk):
@@ -125,20 +118,35 @@ def view_todo_details(request,pk):
     return render(request , 'view_todo_detail.html' , context)
 
 @login_required
-def edit_todo(request,pk):
-    ed = Todo.objects.filter(user = request.user).get(id = pk)
+def edit_todo(request, pk):
+    # Retrieve the todo item based on user and primary key (pk)
+    ed = Todo.objects.filter(user=request.user).get(id=pk)
 
+    # Check if the form has been submitted
     if request.method == 'POST':
+        # Get form values
         ed.title = request.POST.get('title')
         ed.Description = request.POST.get('description')
         ed.due = request.POST.get('due')
-        ed.completed = not ed.completed
-
+        
+        # Check if the completed checkbox is checked, and update the completed status
+        ed.completed = 'completed' in request.POST
+        
+        # Save the updated todo item
         ed.save()
+
+        # Display a success message
         messages.success(request, 'Todo updated successfully')
+
+        # Redirect to the view_todo page
         return redirect('view_todo')
-    context = {'ed':ed}
-    return render(request , 'edit_todo.html' , context)
+
+    # Context to pass to the template (edited todo object)
+    context = {'ed': ed}
+
+    # Render the edit_todo template
+    return render(request, 'edit_todo.html', context)
+
 
 @login_required
 def delete_todo(request,pk):

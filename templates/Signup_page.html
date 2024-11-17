@@ -3,7 +3,7 @@
 {% block content %}
   <div class="form">
     <p>IT TAKES JUST A MINUTE OF YOUR TIME AND IT IS FREE</p>
-    <form class="Sign-Up" method="post" action="{% url 'signup' %}">
+    <form class="Sign-Up" method="POST" action="{% url 'signup' %}">
       {% csrf_token %}
       <label class="label" for="sname">Username:</label>
       <input class="input" id="sname" type="text" name="username" placeholder="John" required>
