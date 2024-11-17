@@ -119,33 +119,21 @@ def view_todo_details(request,pk):
 
 @login_required
 def edit_todo(request, pk):
-    # Retrieve the todo item based on user and primary key (pk)
     ed = Todo.objects.filter(user=request.user).get(id=pk)
 
-    # Check if the form has been submitted
     if request.method == 'POST':
-        # Get form values
         ed.title = request.POST.get('title')
         ed.Description = request.POST.get('description')
         ed.due = request.POST.get('due')
-        
-        # Check if the completed checkbox is checked, and update the completed status
-        ed.completed = 'completed' in request.POST
-        
-        # Save the updated todo item
+        ed.completed = 'completed' in request.POST  # Updated logic for the checkbox
+
         ed.save()
-
-        # Display a success message
         messages.success(request, 'Todo updated successfully')
-
-        # Redirect to the view_todo page
         return redirect('view_todo')
-
-    # Context to pass to the template (edited todo object)
+    
     context = {'ed': ed}
-
-    # Render the edit_todo template
     return render(request, 'edit_todo.html', context)
+
 
 
 @login_required
