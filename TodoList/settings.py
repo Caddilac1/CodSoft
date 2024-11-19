@@ -85,9 +85,8 @@ WSGI_APPLICATION = 'TodoList.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}', 
-        conn_max_age=600, 
-        ssl_require=True
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # Use SQLite for local development
+        conn_max_age=600,  # Connection pooling
     )
 }
 
