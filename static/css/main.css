@@ -93,6 +93,25 @@ html, body {
     border: 1px solid black;
     border-radius: 5px;
   }
+
+  .table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table td, .table th {
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
   
  button[type="submit"] {
     margin-top: 20px;
@@ -180,7 +199,7 @@ html, body {
 
 @media (max-width: 768px) {
   body, html {
-      font-size: 14px; /* Scale down the base font size for smaller screens */
+      font-size: 14px; 
   }
 
   .form, 
@@ -198,7 +217,7 @@ html, body {
 
   p {
       font-size: 16px;
-      line-height: 1.5; /* Increase line-height for better readability */
+      line-height: 1.5; 
   }
 
   .label {
@@ -218,13 +237,13 @@ html, body {
 
   .description {
       font-size: 16px;
-      margin: 10px; /* Add consistent margin */
+      margin: 10px; 
   }
 
   .table {
       display: block;
       overflow-x: auto;
-      white-space: nowrap; /* Enable horizontal scrolling for tables */
+      white-space: nowrap; 
   }
 
   .text, 
