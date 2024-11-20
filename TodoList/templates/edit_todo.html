@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="margin-top: 50px;">
+    <h2 class="text-center">Edit Todo</h2>
+    <br>
+    <form action="{% url 'edit_todo' ed.id %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Title field -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" value="{{ ed.title }}" name="title" required>
+        </div>
+
+        <!-- Description field -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" class="form-control" id="description">{{ ed.Description }}</textarea>
+        </div>
+
+        <!-- Due Date field -->
+        <div class="form-group">
+            <label for="due">Date Due:</label>
+            <input type="date" name="due" value="{{ ed.due|date:'Y-m-d' }}" class="form-control" required>
+        </div>
+
+        <!-- Completed checkbox -->
+        <div class="form-group form-check ">
+            <input type="checkbox" class="form-check-input" id="completed" name="completed" 
+                   {% if ed.completed %}checked{% endif %}>
+            <label class="form-check-label d-inline" for="completed">Mark as Completed</label>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" style="width: 200px;" class="btn btn-outline-success">Save</button>
+    </form>
+</div>
+
+{% endblock %}

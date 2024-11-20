@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+  <div class="form">
+    <p>IT TAKES JUST A MINUTE OF YOUR TIME AND IT IS FREE</p>
+    <form class="Sign-Up" method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <label class="label" for="sname">Username:</label>
+      <input class="input" id="sname" type="text" name="username" placeholder="John" required>
+
+      <label class="label" for="email">Email:</label>
+      <input class="input" id="email" type="email" name="email" placeholder="example@gmail.com" required>
+
+      <label class="label" for="password">Password:</label>
+      <input class="input" id="password" type="password" name="password" required>
+
+      {% if messages %}
+      {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <p class="message">
+                    {{ message }}
+                </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+      {% endif %}
+
+      <button class="btn btn-outline-success" type="submit" name="submit" style="width: 150px;">Register</button>
+      <br>
+
+      <h2 class="p2">Already have an Account? <a href="{% url 'loginpage' %}">Log-in here</a></h2>
+      <p>By Clicking the Sign-Up button, you agree to our <a href="#">Terms and Conditions</a></p>
+    </form>
+    
+  </div>
+{% endblock %}
