@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5 contact-details-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header text-center bg-info text-white">
+                    <h3>Contact Details</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-outline-dark mb-4" href="{% url 'view_contact' %}">&#x2190; Back</a>
+
+                    <!-- Contact Name -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Name:</h5>
+                        <p class="left">
+                            {% if contd.fname and contd.lname %}
+                            {{ contd.fname }} {{ contd.lname }}
+                        {% elif contd.fname %}
+                            {{ contd.fname }}
+                        {% elif contd.lname %}
+                            {{ contd.lname }}
+                        {% else %}
+                            No Name Available
+                        {% endif %}
+                    </p></p>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Phone Number:</h5>
+                        <p class="left">
+                            <a href="tel:{{ contact.phone }}" class="text-dark">
+                                {{ contd.phone }}
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Email:</h5>
+                        <p class="left">
+                            {% if contd.email %}
+                            <a href="mailto:{{ contact.email }}" class="text-dark">
+                                {{ contd.email }}
+                            </a>
+                        {% else %}
+                            No Email Provided
+                        {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- WhatsApp Status -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">WhatsApp Number:</h5>
+                        <p class="left">
+                            {% if contd.is_whatsapp %}
+                                <span class="badge badge-success">Yes</span>
+                            {% else %}
+                                <span class="badge badge-danger">No</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- Save Location -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Saved To:</h5>
+                        <p class="left">{{ contd.saved_to|capfirst }}</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-4">
+                        <a href="#" class="btn btn-outline-primary btn-lg mx-2">Edit Contact</a>
+                        <a href="#" class="btn btn-outline-danger btn-lg mx-2">Delete Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

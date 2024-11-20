@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-cont">
+    <div class="container" style="margin-top: 50px;">
+        <h2 class="text">Contacts</h2>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <p class="mb-0">You have {{ total }} saved contacts</p>
+        </div>
+
+        <hr class="divider mt-1 mb-4">
+        
+        <div class="d-flex justify-content-between">
+            <form class="form-inline my-2 my-lg-0 " method="get" action="#">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            
+            <a href="{% url 'add_contact' %}" class="btn btn-link ml-auto p-0" title="Add New Task">
+                <i class="fas fa-plus" style="font-size: 30px; color: #181b1f;"></i> 
+            </a>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="contacts-list">
+                    {% for contact in contacts %}
+                        <div class="contact-card d-flex justify-content-between align-items-center p-3 mb-3 border">
+                            <div class="contact-name">
+                                
+                                {% if contact.fname %}
+                                <a href="tel:{{ contact.phone }}" class="contact-phone"><strong>{{ contact.fname }}</strong></a>
+                                {% elif contact.lname %}
+                                <a href="tel:{{ contact.phone }}" class="contact-phone"><strong>{{ contact.lname }}</strong></a>
+                                {% else %}
+                                <a href="tel:{{ contact.phone }}" class="contact-phone"><strong>{{ contact.phone }}</strong></a>
+                                {% endif %}
+                            </div>
+                            <div class="contact-actions">
+                                <a href="#" class="more-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{% url 'view_details' contact.id %}">View</a>
+                                    <a class="dropdown-item" id="whatsapp" href="{% url 'edit_contact' contact.id %}">Edit</a>
+                                    {% if contact.email %}
+                                    <a class="dropdown-item" href="mailto:{{contact.email}}">Send email</a>
+                                    {% endif %}
+                                    {% if contact.is_whatsapp %}
+                                    <a class="dropdown-item" href="https://wa.me/{{ contact.phone }}" target="_blank">Message on WhatsApp</a>
+                                    {% endif %}
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    {% empty %}
+                        <div class="no-contacts text-center p-3">
+                            No contact saved.
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
