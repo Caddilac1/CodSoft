@@ -88,6 +88,15 @@ def updatestatus(request,pk):
 
 
 
+def delete(request , pk):
+    de = Contact.objects.filter(request = request.user).get(id = pk)
+    de.delete()
+    messages.success(request , 'Contact deleted successfully')
+    return redirect('view_contact')
+
+
+
+
 def signup(request):
     if request.method == 'POST':
         username = request.POST.get('username')
