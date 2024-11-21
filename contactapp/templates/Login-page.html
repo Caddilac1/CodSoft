@@ -6,7 +6,7 @@
   <div class="form" >
     <h3 class="log"> LOG IN</h3>
     
-   <form method="post" action="{% url 'loginpage' %}">
+   <form method="post" action="{% url 'signin' %}">
     {% csrf_token %}
     <label class="label" for="email"></label>
     <input class="input" id="email" type="text" name="username" placeholder="username" required>

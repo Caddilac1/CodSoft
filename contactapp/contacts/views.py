@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 def home(request):
     return render(request , 'home.html')
 
-
+@login_required
 def add_contact(request):
     if request.method == 'POST':
         
@@ -47,18 +47,21 @@ def add_contact(request):
     return render(request, 'add-contact.html')
 
 
-
+@login_required
 def view_contacts(request):
     contacts = Contact.objects.filter(user = request.user)
     total = Contact.objects.filter(user = request.user).count()
     context = {'contacts': contacts , 'total': total}
     return render(request , 'view-contact.html' , context)
 
+@login_required
 def view_details(request , pk):
     contd = Contact.objects.filter(user = request.user ).get(id = pk)
     context = {'contd': contd}
     return render(request , 'contact_details.html' , context)
 
+
+@login_required
 def edit_contact(request, pk):
     conte = Contact.objects.filter(user=request.user).get(pk=pk)
     if request.method == 'POST':
@@ -78,7 +81,7 @@ def edit_contact(request, pk):
 
 
 
-
+@login_required
 def updatestatus(request,pk):
     stat = Contact.objects.filter(user = request.user).get(id = pk)
     stat.is_whatsapp = not stat.is_whatsapp
@@ -87,15 +90,12 @@ def updatestatus(request,pk):
     return redirect('view_todo')
 
 
-
+@login_required
 def delete(request , pk):
     de = Contact.objects.filter(request = request.user).get(id = pk)
     de.delete()
     messages.success(request , 'Contact deleted successfully')
     return redirect('view_contact')
-
-
-
 
 def signup(request):
     if request.method == 'POST':
