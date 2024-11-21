@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import Contact
 from django.contrib import messages
+from django.contrib.auth import authenticate , login ,logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -11,7 +14,7 @@ def home(request):
 
 def add_contact(request):
     if request.method == 'POST':
-        # Extract form data
+        
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         phone = request.POST.get('phone')
@@ -19,14 +22,14 @@ def add_contact(request):
         saved_to = request.POST.get('save')
         whatsapp = request.POST.get('whatsapp', False)
 
-        # Since phone is required, it's safe to assume it exists
+        
         if phone.startswith("0"):
             phone = "+233" + phone[1:]
         
-        # Determine if 'whatsapp' is selected
+        
         is_whatsapp = True if whatsapp == 'on' else False
 
-        # Save the contact
+       
         contacts = Contact(
             user=request.user,
             fname=fname,
@@ -86,11 +89,57 @@ def updatestatus(request,pk):
 
 
 def signup(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if password < 6:
+            messages.error(request , 'Your cannot be less than 6  character')
+            return redirect('signup')
+        
+        get_username = User.objects.filter(username = username)
+        get_email = User.objects.filter(email = email)
+        
+
+        if get_username:
+            messages.info(request , 'Username already exist')
+            return redirect('signup')
+
+        elif get_email:
+            messages.info(request , 'Email already exist')  
+            return redirect('signup')  
+        
+        user = User.objects.create_user(username = username , email = email , password = password)
+        user.save()
+        messages.success(request, 'Your account has been created successfully!')
+        return redirect('signin')
     return render(request , 'Signup_page.html')
 
 
 def signin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username = username)
+        except User.DoesNotExist:
+            messages.info('Account not found') 
+            return redirect('signin')
+
+        user = authenticate(request , username = username , password = password)   
+        if user is not None:
+            login(request, user)
+            messages.success(request , f'You have succesfully logged in as {request.user.username}')
+            return redirect('view_contact')
+        
+        else:
+            messages.error(request , 'Incorrect username or password... Try again')
+            return redirect('signin')
     return render(request , 'Login-page.html')
 
 def signout(request):
+    logout(request)
+    messages.success(request , 'You have been successfully logged out')
     return redirect('home')
