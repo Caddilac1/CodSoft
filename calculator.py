@@ -42,8 +42,9 @@ def calculator():
                 print("Error: Division by 0 not possible!")
 
             else:
-                print(f"{num1} / {num2} = {results}")
                 results = num1 / num2
+                print(f"{num1} / {num2} = {results}")
+                
                 
 
 
