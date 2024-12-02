@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+    
+  <div class="form" >
+    <h3 class="log"> LOG IN</h3>
+    
+   <form method="post" action="{% url 'loginpage' %}">
+    {% csrf_token %}
+    <label class="label" for="email"></label>
+    <input class="input" id="email" type="text" name="username" placeholder="username" required>
+    <label class="label" for="password"></label>
+      <input class="input" id="password" type="password" name="password" placeholder="password" required>
+    <button class="btn btn-outline-success" value="submit" style="width: 150px;" type="submit">Submit</button>
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    {% if message.tags == 'error' %}
+
+    <p class="message">
+       {{ message }}
+    </p>
+    {% endif %}
+
+    {% endfor %}
+
+
+
+    {% endif %}
+</form>
+      <h2 class="p2"> Don't have an account?<a href="{% url 'signup' %}">Sign-up here</a></h2>
+        
+</div>
+
+
+
+{% endblock %}

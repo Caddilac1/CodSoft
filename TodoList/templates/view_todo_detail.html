@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5 todo-details-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Your Todo Details</h3>
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-outline-dark mb-4" href="{% url 'view_todo' %}">&#x2190; Back</a>
+                    
+                    <!-- Todo Title -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Todo Title:</h5>
+                        <p class="left">{{ details.title }}</p>
+                    </div>
+
+                    <!-- Todo Description -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Todo Description:</h5>
+                        <p class="left">{{ details.Description }}</p>
+                    </div>
+
+                    <!-- Due Date -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Due Date:</h5>
+                        <p class="left">{{ details.due|date:"F j, Y" }}</p>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-3">
+                        <h5 class="font-weight-bold text-secondary">Status:</h5>
+                        <p class="left">
+                            {% if details.completed %}
+                                <span class="badge badge-success">Completed</span>
+                            {% else %}
+                                <span class="badge badge-warning">Pending</span>
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'edit_todo' details.id %}" class="btn btn-outline-primary btn-lg mx-2">Edit Todo</a>
+                        <a href="{% url 'delete_todo' details.id %}" class="btn btn-outline-danger btn-lg mx-2">Delete Todo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

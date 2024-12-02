@@ -1,0 +1,263 @@
+html, body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+
+.welcome-text {
+    text-align: center;
+    padding: 20px;
+    margin-top: 100PX;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgb(36, 32, 32); 
+    text-align: center;
+}
+
+.text {
+    text-align: left;
+    padding-top: -20px;
+}
+
+.no-border th, .no-border td {
+    border-top: none !important;
+}
+
+.divider {
+    border: 0.5px solid #eaeaea;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.custom-hr {
+    border: 0.5px solid #eaeaea;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.form {
+    width: 500px;
+    background-color: rgb(210, 217, 224);
+    border-radius: 6px;
+    margin-top: 80px;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    text-align: center;
+    font-size: 60px;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .left{
+    text-align: left !important;
+    font-size: 1.1em;
+  }
+
+  .todo-details-container h5 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.todo-details-container .card-header h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+ .label {
+    display: flex;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  .table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table td, .table th {
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+
+  
+ button[type="submit"] {
+    margin-top: 20px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .p2 {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 16px;
+  }
+  
+  a:active {
+    background-color: aqua;
+    color: blue;
+  }
+  
+  a:hover {
+    background-color: gray;
+  }
+  
+  
+  .message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px; 
+    color: firebrick;
+    margin-top: 10px;
+  }
+
+  .alert-success {
+    color: #d4edda;
+    background-color: #155724;
+    border-color: #155724;
+    padding: 15px;
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.alert-info{
+  background-color: #e0f7fa; 
+  color: #00796b; 
+  border: 1px solid #b2dfdb; 
+  border-radius: 5px;
+  padding: 15px;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+  
+  
+  .log {
+    margin: 0 auto;
+    padding-bottom: 25px;
+  }
+
+  #add {
+    color: white;
+    background-color: green;
+    border-color: darkgreen;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#add:hover {
+    background-color: darkgreen;
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+  body, html {
+      font-size: 14px; 
+  }
+
+  .form, 
+  .message, 
+  .alert-success, 
+  .alert-info {
+      width: 90%;
+      margin: 20px auto; 
+      padding: 15px; 
+  }
+
+  .form h3 {
+      font-size: 40px; 
+  }
+
+  p {
+      font-size: 16px;
+      line-height: 1.5; 
+  }
+
+  .label {
+      font-size: 18px; 
+  }
+
+  button[type="submit"] {
+      width: 100%; 
+      padding: 10px; 
+  }
+
+  #add {
+      width: 100%; 
+      text-align: center;
+      margin: 10px 0; 
+  }
+
+  .description {
+      font-size: 16px;
+      margin: 10px; 
+  }
+
+  .table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap; 
+  }
+
+  .text, 
+  .welcome-text {
+      text-align: center;
+  }
+
+  h2.text {
+      font-size: 1.5em; 
+  }
+
+  .alert-info, .alert-success {
+      text-align: center;
+      font-size: 14px; 
+      line-height: 1.4; 
+  }
+}
