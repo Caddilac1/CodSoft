@@ -13,4 +13,6 @@ urlpatterns = [
     path('view_todo_details/<int:pk>/', views.view_todo_details, name='view_todo_details'),
     path('edit_todo/<int:pk>/', views.edit_todo, name="edit_todo"),
     path('delete_todo/<int:pk>/', views.delete_todo, name="delete_todo"),
+    path('contact/' , views.contact , name="contact"),
+    path('email/' , views.email , name="email"),
 ]
