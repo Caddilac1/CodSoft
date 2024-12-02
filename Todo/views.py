@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from .models import Todo
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -147,11 +150,8 @@ def edit_todo(request, pk):
 
         # Redirect to the view_todo page
         return redirect('view_todo')
-
-    # Context to pass to the template (edited todo object)
     context = {'ed': ed}
 
-    # Render the edit_todo template
     return render(request, 'edit_todo.html', context)
 
 
@@ -161,3 +161,37 @@ def delete_todo(request,pk):
     de.delete()
     messages.success(request, 'Todo deleted successfully')
     return redirect('view_todo')
+
+def contact(request):
+    if request.method == 'POST':
+        send_via = request.POST.get('send_method')
+
+        
+        if send_via == 'email':
+            return redirect('email')  
+    return render(request, 'contact.html')
+
+
+def email(request):
+    if request.method == 'POST':
+        print(request.POST)
+        sender = request.POST.get('sender')  # Get the sender's name
+        sender_email = request.POST.get('sender_email')  # Get the sender's email
+        message = request.POST.get('message')  # Get the feedback message
+
+        try:
+            send_mail(
+                'Feedback from ' + sender,  # Subject of the email
+                message,  # Body of the email
+                sender_email,  # From email (using the sender's email)
+                ['nabaradirector@gmail.com'],  # To email (your email set in settings)
+                fail_silently=False
+            )
+            print("Email sent successfully!") 
+            print(f"Email Details - Subject: Feedback from {sender}, Message: {message}, From: {sender_email}, To: {settings.EMAIL_HOST_USER}")
+ # Log success
+            return HttpResponse('Feedback sent successfully!')  # Optional: Confirm feedback sent
+        except Exception as e:
+            print(f"Error: {e}")  # Log the error for debugging
+            return HttpResponse(f"Failed to send feedback: {e}")  # Show error in response
+    return render(request, 'email.html')
