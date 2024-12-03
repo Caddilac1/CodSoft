@@ -162,19 +162,12 @@ def delete_todo(request,pk):
     messages.success(request, 'Todo deleted successfully')
     return redirect('view_todo')
 
-def contact(request):
-    if request.method == 'POST':
-        send_via = request.POST.get('send_method')
-
-        
-        if send_via == 'email':
-            return redirect('email')  
+def contact(request): 
     return render(request, 'contact.html')
 
 
 def email(request):
     if request.method == 'POST':
-        print(request.POST)
         sender = request.POST.get('sender')  # Get the sender's name
         sender_email = request.POST.get('sender_email')  # Get the sender's email
         message = request.POST.get('message')  # Get the feedback message

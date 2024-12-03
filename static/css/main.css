@@ -6,6 +6,15 @@ html, body {
 }
 
 
+.main-cont {
+  width: 500px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2%;
+}
+
+
 .welcome-text {
   text-align: center;
   padding: 20px;
@@ -282,32 +291,6 @@ h2.text {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.feedback-method-modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  width: 300px;
-  text-align: center;
-}
-
-/* Add modal overlay */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
 
 .contact-button-unique {
   margin-top: 20px;
@@ -332,11 +315,6 @@ h2.text {
 }
 
 
-/* Hidden initially */
-#email-feedback-form {
-  display: none;
-}
-
 /* Add styles to make the form look correct */
 .contact-form-unique {
   padding: 20px;
@@ -344,3 +322,11 @@ h2.text {
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.contact-message-unique {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
