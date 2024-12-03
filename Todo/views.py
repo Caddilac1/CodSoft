@@ -177,7 +177,7 @@ def email(request):
                 'Feedback from ' + sender,  # Subject of the email
                 message,  # Body of the email
                 sender_email,  # From email (using the sender's email)
-                ['nabaradirector@gmail.com'],  # To email (your email set in settings)
+                [settings.EMAIL_HOST_USER],  # To email (your email set in settings)
                 fail_silently=False
             )
             print("Email sent successfully!") 
