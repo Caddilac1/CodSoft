@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-n!l2dn8th1q)ddibo3nmk$pp=#qt*ov1ep=z^6(4#os=fk&!tm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'caddilacdj.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'caddilacdj.herokuapp.com' , '.vercel.app']
 
 
 
@@ -148,3 +148,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'loginpage'
 
 django_heroku.settings(locals())
+
+
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT', cast=int, default=465)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=False)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool, default=True)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+
+
