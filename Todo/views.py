@@ -165,6 +165,8 @@ def delete_todo(request,pk):
 def contact(request): 
     return render(request, 'contact.html')
 
+def thank_you(request):
+    return render(request , 'thankyou.html')
 
 def email(request):
     if request.method == 'POST':
@@ -180,11 +182,8 @@ def email(request):
                 [settings.EMAIL_HOST_USER],  # To email (your email set in settings)
                 fail_silently=False
             )
-            print("Email sent successfully!") 
-            print(f"Email Details - Subject: Feedback from {sender}, Message: {message}, From: {sender_email}, To: {settings.EMAIL_HOST_USER}")
  # Log success
-            return HttpResponse('Feedback sent successfully!')  # Optional: Confirm feedback sent
+            return redirect('thank_you')  
         except Exception as e:
             print(f"Error: {e}")  # Log the error for debugging
-            return HttpResponse(f"Failed to send feedback: {e}")  # Show error in response
     return render(request, 'email.html')
