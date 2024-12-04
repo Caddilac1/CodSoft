@@ -85,11 +85,20 @@ WSGI_APPLICATION = 'TodoList.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',  # Use SQLite for local development
-        conn_max_age=600,  # Connection pooling
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# If DATABASE_URL is set, configure to use PostgreSQL
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600,  # Connection pooling
+        ssl_require=True   # Enforce SSL for Heroku
+    )
 
 
 
